@@ -14,5 +14,4 @@ export const useBoardStore = create<BoardState>((set) => ({
     const board = await getTodoGroupedByColumn()
     set({board})
   }
-  
 }))
