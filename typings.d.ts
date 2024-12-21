@@ -10,6 +10,7 @@ interface Column {
 }
 
 interface Todo {
+    title: ReactNode
     $id:string,
     $createdAt:string,
     status:TypedColumn,

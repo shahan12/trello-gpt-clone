@@ -30,6 +30,8 @@ function Column({ id, todos, index }: Props) {
             droppableId={index.toString()}
             type="card"
             isDropDisabled={false}
+            isCombineEnabled={true}
+            ignoreContainerClipping={true}
           >
             {(provided, snapshot) => (
               <div
