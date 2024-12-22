@@ -8,6 +8,7 @@ function Board() {
   const getBoard = useBoardStore((state) => state.getBoard);
   const board = useBoardStore((state) => state.board);
   const setBoardState = useBoardStore((state) => state.setBoardState);
+  const updateTodoInDB = useBoardStore((state) => state.updateTodoInDB);
   useEffect(() => {
     getBoard();
   }, []);
@@ -62,7 +63,6 @@ function Board() {
       setBoardState({ ...board, columns: newColumns });
     } else {
       // dragging to new column
-      console.log("here");
       const finishTodos = Array.from(finishCol.todos);
       finishTodos.splice(destination.index, 0, todoMoved);
 
@@ -77,7 +77,7 @@ function Board() {
         id: finishCol.id,
         todos: finishTodos,
       });
-
+      updateTodoInDB(todoMoved, finishCol.id);
       setBoardState({ ...board, columns: newColumns });
     }
   };
