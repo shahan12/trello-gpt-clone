@@ -2,12 +2,26 @@
 import { useBoardStore } from "@/store/boardStore";
 import { MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/16/solid";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "react-avatar";
 
 function Header() {
   const searchString = useBoardStore((state) => state.searchString);
   const setSearchString = useBoardStore((state) => state.setSearchString);
+  const board = useBoardStore((state) => state.board);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [suggestion, setSuggestion] = useState<String>("");
+  useEffect(() => {
+    if (board.columns.size === 0) return;
+    setLoading(true);
+
+    // const fetchSugesstionFunc = asyns() =>{
+    //   const suggestion = await fetchSugesstion(board);
+    //   setSuggestion(suggestion);
+    //   setLoading(false)
+    // }
+  }, [board]);
+
   return (
     <header className="">
       <div className="flex flex-col md:flex-row items-center p-5 bg-gray-500/10 rounded-b-2xl ">
