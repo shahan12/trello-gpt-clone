@@ -32,7 +32,7 @@ function Board() {
     //Handle notes move
     const columns = Array.from(board.columns);
     const startColIndex = columns[Number(source.droppableId)];
-    const finishColIndex = columns[Number(source.droppableId)];
+    const finishColIndex = columns[Number(destination.droppableId)];
 
     const startCol: Column = {
       id: startColIndex[0],
@@ -50,7 +50,6 @@ function Board() {
 
     const newTodos = startCol.todos;
     const [todoMoved] = newTodos.splice(source.index, 1);
-
     if (startCol.id === finishCol.id) {
       newTodos.splice(destination.index, 0, todoMoved);
       const newCol = {
@@ -63,7 +62,7 @@ function Board() {
       setBoardState({ ...board, columns: newColumns });
     } else {
       // dragging to new column
-
+      console.log("here");
       const finishTodos = Array.from(finishCol.todos);
       finishTodos.splice(destination.index, 0, todoMoved);
 
@@ -78,6 +77,8 @@ function Board() {
         id: finishCol.id,
         todos: finishTodos,
       });
+
+      setBoardState({ ...board, columns: newColumns });
     }
   };
   return (
