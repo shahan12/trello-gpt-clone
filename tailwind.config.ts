@@ -11,6 +11,9 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        animation: {
+          spin: 'spin 1s linear infinite',
+        },
       },
     },
   },

@@ -12,10 +12,8 @@ function Board() {
   useEffect(() => {
     getBoard();
   }, []);
-  console.log(board);
   const handleOnDragEnd = (result: DropResult) => {
     const { destination, source, type } = result;
-    console.log(type);
     // if drag is outside the drag area
     if (!destination) return;
 

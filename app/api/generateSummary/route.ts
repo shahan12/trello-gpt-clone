@@ -5,7 +5,6 @@ import OpenAI from "openai";
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
   });
-console.log("api key " , process.env.OPENAI_API_KEY)
 export async function POST(request:Request) {
 
         const {todos} = await request.json();
@@ -26,13 +25,10 @@ export async function POST(request:Request) {
             choices: [
                 {
                     message: {
-                        content: `Mock summary of the todos: ${JSON.stringify(todos)} , Your free OpenAI uage has expired please add credits.`,
+                        content: `Mock summary of the todos: ${JSON.stringify(todos)} , Your free OpenAI usage has expired please add credits`,
                     },
                 },
             ],
         };
-        console.log(todos , mockResponse , "resp")
-        
-
         return NextResponse.json(mockResponse.choices[0]?.message?.content);
 }

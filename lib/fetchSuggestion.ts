@@ -12,7 +12,6 @@ const fetchSuggestion = async (board:Board) =>{
 
     const GPTData = await res.json();
     const {content} = GPTData;
-    console.log(GPTData , content , "coo")
     return GPTData;
 }
 

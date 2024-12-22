@@ -12,14 +12,15 @@ function Header() {
   const board = useBoardStore((state) => state.board);
   const [loading, setLoading] = useState<boolean>(true);
   const [suggestion, setSuggestion] = useState<String>("");
-  console.log(suggestion, "suggg");
   useEffect(() => {
     if (board.columns.size === 0) return;
-    setLoading(false);
+    setLoading(true);
     const fetchSugesstionFunc = async () => {
       const suggestion = await fetchSuggestion(board);
-      setSuggestion(suggestion);
-      setLoading(false);
+      setTimeout(() => {
+        setSuggestion(suggestion);
+        setLoading(false);
+      }, 500);
     };
 
     fetchSugesstionFunc();
@@ -55,10 +56,12 @@ function Header() {
         <p className="flex items-center p-5 text-sm font-light pr-5  shadow-xl rounded-xl w-fit bg-white italic max-w-3xl text-[#0055D1]">
           <UserCircleIcon
             className={`inline-block  h-10 w-10 text-[#0055D1] mr-1${
-              loading && "animate-spin"
+              loading ? "animate-spin" : ""
             } `}
           />
-          {suggestion && !loading ? suggestion : "GPT is summarising"}
+          {suggestion && !loading
+            ? suggestion
+            : "Getting summary from Open API"}
         </p>
       </div>
     </header>

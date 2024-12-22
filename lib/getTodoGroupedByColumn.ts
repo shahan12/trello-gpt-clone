@@ -36,8 +36,6 @@ export const getTodoGroupedByColumn = async () =>{
             })
         }
     }
-    console.log(columns)
-
 
     //sort column by type
     const sortedColumn = new Map(
