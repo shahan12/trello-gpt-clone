@@ -1,4 +1,5 @@
 "use client";
+import fetchSuggestion from "@/lib/fetchSuggestion";
 import { useBoardStore } from "@/store/boardStore";
 import { MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/16/solid";
 import Image from "next/image";
@@ -9,17 +10,19 @@ function Header() {
   const searchString = useBoardStore((state) => state.searchString);
   const setSearchString = useBoardStore((state) => state.setSearchString);
   const board = useBoardStore((state) => state.board);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [suggestion, setSuggestion] = useState<String>("");
+  console.log(suggestion, "suggg");
   useEffect(() => {
     if (board.columns.size === 0) return;
-    setLoading(true);
+    setLoading(false);
+    const fetchSugesstionFunc = async () => {
+      const suggestion = await fetchSuggestion(board);
+      setSuggestion(suggestion);
+      setLoading(false);
+    };
 
-    // const fetchSugesstionFunc = asyns() =>{
-    //   const suggestion = await fetchSugesstion(board);
-    //   setSuggestion(suggestion);
-    //   setLoading(false)
-    // }
+    fetchSugesstionFunc();
   }, [board]);
 
   return (
@@ -50,8 +53,12 @@ function Header() {
       </div>
       <div className="flex items-center justify-center px-5 py-2 md:py-5">
         <p className="flex items-center p-5 text-sm font-light pr-5  shadow-xl rounded-xl w-fit bg-white italic max-w-3xl text-[#0055D1]">
-          <UserCircleIcon className="inline-block  h-10 w-10 text-[#0055D1] mr-1" />
-          GPT is working
+          <UserCircleIcon
+            className={`inline-block  h-10 w-10 text-[#0055D1] mr-1${
+              loading && "animate-spin"
+            } `}
+          />
+          {suggestion && !loading ? suggestion : "GPT is summarising"}
         </p>
       </div>
     </header>

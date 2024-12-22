@@ -1,7 +1,6 @@
-const { Configuration, OpenAIApi } = require("openai");
+import { OpenAI } from "openai";
 
 // Configure the OpenAI API
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY // Replace with your API key
+export const openai  = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY, // Ensure this environment variable is set
 });
-export const openai = new OpenAIApi(configuration);
