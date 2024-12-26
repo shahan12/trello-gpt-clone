@@ -9,6 +9,8 @@ interface BoardState {
     deleteTask : (taskIndex: number , todoId: Todo, id : TypedColumn ) => void;
     updateTodoInDB: (todo:Todo , columnId:TypedColumn)=> void;
     searchString: string,
+    newTaskInput:string,
+    setNewTaskInput:(input:string)=> void;
     setSearchString:(searchString: string)=> void,
 }
 
@@ -52,6 +54,8 @@ export const useBoardStore = create<BoardState>((set , get) => ({
   },
 
   searchString:"",
-  setSearchString: (searchString)=> set({searchString})
+  setSearchString: (searchString)=> set({searchString}),
+  newTaskInput:"",
+  setNewTaskInput : (input:string) => set({newTaskInput: input}),
 
 }))
