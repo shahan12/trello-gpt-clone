@@ -3,19 +3,19 @@ import Board from "@/components/board";
 import Header from "@/components/header";
 import Modal from "@/components/Modal";
 import { useModalStore } from "@/store/ModalStore";
-import Image from "next/image";
 import { useEffect, useRef } from "react";
-import OutsideClickHandler from "react-outside-click-handler";
 
 export default function Home() {
   const closeModal = useModalStore((state) => state.closeModal);
   const isOpen = useModalStore((state) => state.isOpen);
-
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     // Event handler for outside clicks
-    const handleOutsideClick = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
         closeModal(); // Close the modal if the click is outside
       }
     };
