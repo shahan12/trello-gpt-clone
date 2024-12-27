@@ -75,6 +75,9 @@ function Modal() {
                   </div>
                   {/**Radio btn grp */}
                   <TaskTypeRadioGroup />
+                  <span className="font-extrabold bg-red-400 text-center">
+                    Feature Still in progress..... Complete very sooooooooooon
+                  </span>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
